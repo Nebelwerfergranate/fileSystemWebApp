@@ -1,0 +1,11 @@
+"use strict";
+
+var BaseFileModel = require('./baseFileModel');
+
+class FileModel extends BaseFileModel{
+    constructor(options){
+        super(options);
+    }
+}
+
+module.exports = FileModel;
