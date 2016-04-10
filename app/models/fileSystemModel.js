@@ -34,10 +34,10 @@ class FileSystemModel{
             path: this._path,
             name: "root"
         });
-        this._fillFolder(this._path, this._root.content);
+        this._fillFolder(this._path, this._root);
     }
 
-    _fillFolder(dir, content){
+    _fillFolder(dir, folder){
         var files = fs.readdirSync(dir);
 
         for(let f in files){
@@ -48,12 +48,12 @@ class FileSystemModel{
             };
 
             if(fs.statSync(filePath).isDirectory()){
-                var folder = new Folder(options);
-                content.push(folder);
-                this._fillFolder(filePath, folder.content);
+                var newFolder = new Folder(options);
+                folder.content.push(newFolder);
+                this._fillFolder(filePath, newFolder);
             } else {
                 var file = new File(options);
-                content.push(file);
+                folder.content.push(file);
             }
         }
     }

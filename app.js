@@ -11,9 +11,6 @@ var util = require('util');
 
 console.log(util.inspect(model, {showHidden: false, depth: null}));
 
-console.log("test");
-
-
 //console.log(getFiles('D:/kursu'));
 
 
