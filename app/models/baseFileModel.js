@@ -4,12 +4,13 @@ class BaseFileModel{
     constructor(options){
         this._name = "";
         this._path = "";
+        this._type = "";
 
         if(options.name != null){
             this._name = options.name;
         }
 
-        if(options.path != null){
+        if(options.path != null) {
             this._path = options.path;
         }
     }
@@ -28,6 +29,10 @@ class BaseFileModel{
 
     set path(value){
         this._path = value;
+    }
+
+    get type(){
+        return this._type;
     }
 }
 

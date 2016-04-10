@@ -1,10 +1,13 @@
 "use strict";
 
-var BaseFileModel = require('./baseFileModel');
+var BaseFileModel = require("./baseFileModel");
+var fileTypes = require('../../shared/enums');
 
 class FileModel extends BaseFileModel{
-    constructor(options){
+    constructor(options) {
         super(options);
+
+        this._type = fileTypes.file;
     }
 }
 

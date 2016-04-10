@@ -46,7 +46,7 @@ class FileSystemModel{
     }
 
     _fillFolder(dir, folder){
-        this._pathList.push(dir);
+        this._pathList.push(folder);
         folder.pathNumber = this._pathList.length - 1;
         var files = fs.readdirSync(dir);
 

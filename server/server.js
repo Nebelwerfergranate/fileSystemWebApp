@@ -1,5 +1,10 @@
 "use strict";
 
+global.rootRequire = function(name) {
+    return require("../" + name);
+};
+
+
 var FileSystem = require("./../app/models/fileSystemModel");
 
 var model = new FileSystem("D:\\kursu");
@@ -25,13 +30,18 @@ app.get('/model', function(req, res){
     res.json(model);
 });
 
-//app.get('/:page?', function(req, res){  // ? means that param is optional
-//    var page = req.params.page;
-//    if(page == null){
-//        page = "home";
-//    }
-//});
+app.get('/getFolder/:folderId?', function(req, res){  // ? means that param is optional
+    var folderId = req.params.folderId;
+
+    if(folderId == null){
+        folderId = 0;
+    }
+
+    res.json(model.pathList[folderId]);
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
 });
+
+
