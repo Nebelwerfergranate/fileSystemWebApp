@@ -11,6 +11,8 @@ class FileSystemModel{
         this._path = path;
         this._root = null;
 
+        this._pathList = null;
+
         if(path != null){
             this._initModel();
         }
@@ -29,15 +31,23 @@ class FileSystemModel{
         return this._root;
     }
 
+    get pathList(){
+        return this._pathList;
+    }
+
+
     _initModel(){
         this._root = new Folder({
             path: this._path,
             name: "root"
         });
+        this._pathList = new Array();
         this._fillFolder(this._path, this._root);
     }
 
     _fillFolder(dir, folder){
+        this._pathList.push(dir);
+        folder.pathNumber = this._pathList.length - 1;
         var files = fs.readdirSync(dir);
 
         for(let f in files){

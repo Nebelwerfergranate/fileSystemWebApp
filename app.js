@@ -2,14 +2,13 @@
 
 var FileSystem = require("./app/models/fileSystemModel");
 
-var model = new FileSystem("D:/kursu");
-
-
-//console.log(model);
+var model = new FileSystem("D:\\kursu");
 
 var util = require('util');
 
 console.log(util.inspect(model, {showHidden: false, depth: null}));
+
+console.log(model.pathList[3]);
 
 //console.log(getFiles('D:/kursu'));
 
