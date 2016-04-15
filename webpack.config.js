@@ -18,7 +18,12 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             loader: "babel?presets[]=es2015,plugins[]=transform-es2015-modules-commonjs"
-        }]
+        },
+            {
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
+            }
+        ]
     },
     plugins: [
       new webpack.optimize.UglifyJsPlugin({

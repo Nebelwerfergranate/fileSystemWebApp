@@ -38,6 +38,7 @@ app.get('/getFolder/:folderId?', function(req, res){  // ? means that param is o
     }
 
     res.json(model.pathList[folderId]);
+    // todo remove content from inner folder + remove other unnecessary info.
 });
 
 app.listen(3000, function () {
