@@ -1,15 +1,7 @@
 "use strict";
 
-let a = 1234;
-let b = 4;
+var Page = require('./components/page.js');
 
-class MyClass{
-    constructor(){
-        this._a = 431;
-    }
-    megaFunk(){
-        return "bugoga";
-    }
-}
-
-alert("hello!!1");
+var myPage = new Page({
+    element: document.querySelector('[data-component="page"]')
+});
