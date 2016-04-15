@@ -45,22 +45,23 @@ class FileSystemModel{
         this._fillFolder(this._path, this._root);
     }
 
-    _fillFolder(dir, folder){
+    _fillFolder(filePath, folder){
         this._pathList.push(folder);
         folder.pathNumber = this._pathList.length - 1;
-        var files = fs.readdirSync(dir);
+        var files = fs.readdirSync(filePath);
 
         for(let f in files){
-            var filePath = path.normalize(path.join(dir, files[f]));
+            var newFilePath = path.normalize(path.join(filePath, files[f]));
             var options = {
                 name: files[f],
-                path: filePath
+                path: newFilePath,
+                parentPathNumber: folder.pathNumber
             };
 
-            if(fs.statSync(filePath).isDirectory()){
+            if(fs.statSync(newFilePath).isDirectory()){
                 var newFolder = new Folder(options);
                 folder.content.push(newFolder);
-                this._fillFolder(filePath, newFolder);
+                this._fillFolder(newFilePath, newFolder);
             } else {
                 var file = new File(options);
                 folder.content.push(file);
