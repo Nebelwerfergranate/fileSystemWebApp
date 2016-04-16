@@ -10,10 +10,8 @@ var FileSystem = require("./../app/models/fileSystemModel");
 var model = new FileSystem("D:\\kursu");
 
 //var util = require('util');
-
 //console.log(util.inspect(model, {showHidden: false, depth: null}));
 
-//console.log(model.pathList[3]);
 
 var express = require('express');
 var app = express();
@@ -37,8 +35,15 @@ app.get('/getFolder/:folderId?', function(req, res){  // ? means that param is o
         folderId = 0;
     }
 
-    res.json(model.pathList[folderId]);
-    // todo remove content from inner folder + remove other unnecessary info.
+    folderId = Number.parseInt(folderId);
+
+    if(isNaN(folderId)){
+        res.status(400);
+        res.send('Bad request');
+        return;
+    }
+
+    res.json(model.getFolderByPathNumber(folderId));
 });
 
 app.listen(3000, function () {

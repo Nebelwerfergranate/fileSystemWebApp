@@ -1,27 +1,22 @@
 "use strict";
 
-var BaseFileModel = require("./baseFileModel");
-var fileTypes = require("../../shared/enums/fileTypes");
+var BaseViewModel = require("./baseViewModel");
+var fileTypes = require("../../../shared/enums/fileTypes");
 
-class FolderModel extends BaseFileModel{
+class ContentItemViewModel extends BaseViewModel{
     constructor(options){
         options.type = fileTypes.folder;
         super(options);
 
-        this._content = [];
         this._pathNumber = 0;
 
         this._initialize(options);
     }
 
-    get content(){
-        return this._content;
-    }
-
-    get pathNumber (){
+    get pathNumber(){
         return this._pathNumber;
     }
-    set pathNumber(value){
+    set pathNumber(velue){
         this._pathNumber = value;
     }
 
@@ -34,4 +29,4 @@ class FolderModel extends BaseFileModel{
     }
 }
 
-module.exports = FolderModel;
+module.exports = ContentItemViewModel;

@@ -2,9 +2,13 @@
 
 var File = require("./fileModel");
 var Folder = require("./folderModel");
+var FileViewModel = require("./viewModels/fileViewModel");
+var FolderViewModel = require("./viewModels/folderViewModel");
+var ContentItemViewModel = require("./viewModels/contentItemViewModel");
 
 var fs = require("fs");
 var path = require("path");
+var fileTypes = require("../../shared/enums/fileTypes");
 
 class FileSystemModel{
     constructor(path){
@@ -31,10 +35,29 @@ class FileSystemModel{
         return this._root;
     }
 
-    get pathList(){
-        return this._pathList;
-    }
+    getFolderByPathNumber(pathNumber){
 
+        if(!Number.isInteger(pathNumber)){
+            throw new Error(`pathNumber value '${pathNumber}' is not an integer`);
+        }
+
+        if (!this._pathList.hasOwnProperty(pathNumber)) {
+            return null;
+        }
+
+        var folder = this._pathList[pathNumber];
+        var folderToReturn = new FolderViewModel({
+            name: folder.name,
+            parentPathNumber: folder.parentPathNumber
+        });
+
+        this._setFolderToReturnContentUsingFolder({
+            folder: folder,
+            folderToReturn: folderToReturn
+        });
+
+        return folderToReturn;
+    }
 
     _initModel(){
         this._root = new Folder({
@@ -65,6 +88,36 @@ class FileSystemModel{
             } else {
                 var file = new File(options);
                 folder.content.push(file);
+            }
+        }
+    }
+
+    _setFolderToReturnContentUsingFolder(options){
+        var folder = options.folder;
+        var folderToReturn = options.folderToReturn;
+
+        if (folder == null || folderToReturn == null){
+            throw new Error("one or more required parameters is undefined");
+        }
+
+        var count = folder.content.length;
+
+        for(let i = 0; i < count; i++){
+            var contentItem = folder.content[i];
+            var options = {
+                name: contentItem.name
+            };
+
+            switch(contentItem.type){
+                case fileTypes.folder:
+                    options.pathNumber = contentItem.pathNumber;
+                    folderToReturn.content.push(new ContentItemViewModel(options));
+                    break;
+                case fileTypes.file:
+                    folderToReturn.content.push(new FileViewModel(options));
+                    break;
+                default:
+                    throw new Error(`file type ${contentItem.type} isn't supported`);
             }
         }
     }

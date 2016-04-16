@@ -2,12 +2,16 @@
 
 class BaseFileModel{
     constructor(options){
+        this._type = null;
         this._name = "";
         this._path = "";
-        this._type = "";
         this._parentPathNumber = 0;
 
         this._initialize(options);
+    }
+
+    get type(){
+        return this._type;
     }
 
     get name(){
@@ -24,11 +28,6 @@ class BaseFileModel{
         this._path = value;
     }
 
-    get type(){
-        return this._type;
-    }
-
-
     get parentPathNumber(){
         return this._parentPathNumber;
     }
@@ -37,6 +36,12 @@ class BaseFileModel{
     }
 
     _initialize(options){
+        if(options.type != null){
+            this._type = options.type
+        } else{
+            throw new Error("type is not defined");
+        }
+
         if(options.name != null){
             this._name = options.name;
         }
