@@ -12,8 +12,8 @@ class FileSystem extends Component{
 
     _render(folder) {
         this._el.innerHTML = templateFunction({
-            name: folder._name,
-            content: folder._content
+            name: folder.name,
+            content: folder.content
         });
     }
 

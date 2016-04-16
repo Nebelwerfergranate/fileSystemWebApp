@@ -1,9 +1,12 @@
 <h2>Name: {{ this.name }}</h2>
-<h2>Content</h2>
-<ul data-selector="filesystem-content">
-    {{# each content }}
-        <li data-selector="filesystem-content-item" data-path-number="{{ this._pathNumber }}">
-            {{this._name}}
-        </li>
-    {{/each}}
-</ul>
+<div data-selector="filesystem-content">
+    <h3 data-path-number="{{this.parentPathNumber}}">back</h3>
+    <h2>Content</h2>
+    <ul>
+        {{# each content }}
+            <li data-selector="filesystem-content-item" data-path-number="{{ this.pathNumber }}">
+                {{this.name}}
+            </li>
+        {{/each}}
+    </ul>
+</div>

@@ -8,28 +8,17 @@ class folderViewModel extends BaseViewModel{
         options.type = fileTypes.folder;
         super(options);
 
-        this._parentPathNumber = 0;
-        this._content = [];
+        this.parentPathNumber = 0;
+        this.content = [];
 
-        this._initialize(options);
+        this.initialize(options);
     }
 
-    get parentPathNumber(){
-        return this._parentPathNumber;
-    }
-    set parentPathNumber(value){
-        this._parentPathNumber = value;
-    }
-
-    get content(){
-        return this._content;
-    }
-
-    _initialize(options){
-        super._initialize(options);
+    initialize(options){
+        super.initialize(options);
 
         if(options.parentPathNumber != null){
-            this._parentPathNumber = options.parentPathNumber;
+            this.parentPathNumber = options.parentPathNumber;
         }
     }
 }
