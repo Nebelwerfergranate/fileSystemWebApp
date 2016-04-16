@@ -4,17 +4,15 @@ global.rootRequire = function(name) {
     return require("../" + name);
 };
 
-
-var FileSystem = require("./../app/models/fileSystemModel");
-
-var model = new FileSystem("D:\\kursu");
-
-//var util = require('util');
-//console.log(util.inspect(model, {showHidden: false, depth: null}));
-
-
+var FileSystem = require("./models/fileSystemModel");
 var express = require('express');
 var app = express();
+
+
+/********** ROOT PATH **********/
+var model = new FileSystem("D:\\Visual Studio");
+/********** ROOT PATH **********/
+
 
 app.use(function(req, res, next){
     console.log("%s %s", req.method, req.url);
@@ -22,11 +20,6 @@ app.use(function(req, res, next){
 });
 
 app.use(express.static('./public'));
-
-app.get('/model', function(req, res){
-    //res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
-    res.json(model);
-});
 
 app.get('/getFolder/:folderId?', function(req, res){  // ? means that param is optional
     var folderId = req.params.folderId;
@@ -47,7 +40,7 @@ app.get('/getFolder/:folderId?', function(req, res){  // ? means that param is o
 });
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+    console.log('App listening on port 3000!');
 });
 
 
