@@ -1,0 +1,8 @@
+.js-file{
+    color: black;
+}
+
+.js-folder{
+    color: blue;
+    cursor: pointer;
+}
